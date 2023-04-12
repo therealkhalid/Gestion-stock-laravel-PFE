@@ -68,10 +68,10 @@
     $('#mytable').DataTable({
         dom:'Bfrtip',
         buttons:['copy','excel','csv','pdf','print','colvis'],
-        "pageLength": 5,
+        "pageLength": 3,
 
         "language": {
-    "sEmptyTable":    "",
+    "sEmptyTable":    "Aucun enregistrements correspondants trouvés",
     "sInfo":          "Affichage de _START_ à _END_ sur _TOTAL_ entrées ",
     "sSearch":        "Chercher:",
     "oPaginate": {

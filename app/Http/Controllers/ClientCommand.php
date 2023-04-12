@@ -58,8 +58,16 @@ class ClientCommand extends Controller
     {
         $id=auth()->user()->id;
         $data=DB::select("SELECT users.id,id_commande,quantite,commande.prix_commande,commande.date_commande,name FROM commande
-         INNER JOIN users ON commande.id=users.id WHERE commande.id='{$id}'");
+         INNER JOIN users ON commande.id=users.id WHERE commande.id='{$id}'AND commande.id_commande NOT IN(SELECT livraison.id_commande FROM livraison)");
          return view('clients.listeCommande')->with(["data"=>$data]);
+        
+    }
+    public function HistoriQueCommande()
+    {
+        $id=auth()->user()->id;
+        $data=DB::select("SELECT users.id,id_commande,quantite,commande.prix_commande,commande.date_commande,name FROM commande
+         INNER JOIN users ON commande.id=users.id WHERE commande.id='{$id}'AND commande.id_commande  IN(SELECT livraison.id_commande FROM livraison WHERE etat=1)");
+         return view('clients.HistoriqueCommande')->with(["data"=>$data]);
         
     }
 

@@ -49,6 +49,9 @@ Route::middleware(['auth','user-role:client'])->group(function()
 {
     
     Route::get("/client/home",[ClientController::class,'afficher'])->name('home.client');
+    // Route::get("/client/HistoriqueCommande",[ClientController::class,'HistoriQueCommande'])->name('historiqueCommande');
+    Route::get('/client/HistoriqueCommande',[ClientCommand::class,'HistoriQueCommande'])->name('khalid');
+
     Route::resource('/client/commande',ClientCommand::class);
     Route::resource('/reclamation',ClientReclamation::class);
     Route::resource('/client/pro',ProfileClient::class);

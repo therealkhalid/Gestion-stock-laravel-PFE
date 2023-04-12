@@ -175,6 +175,11 @@ class AppServiceProvider extends ServiceProvider
                     'url'     =>'/client/commande/show',
                     'icon' => 'fas fa-list',
                 ],
+                [
+                    'text'    => 'Historique/Commandes',
+                    'url'     =>"/client/HistoriqueCommande",
+                    'icon' => 'fas fa-list',
+                ],
         //      ]
                     [
                         'text'    => 'Ajouter une Commande',

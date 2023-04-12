@@ -33,14 +33,8 @@ class AdminCommand extends Controller
         
         public function show()
         {
-            $commandes=DB::select("select commande.id_commande,name,users.adress,telephone,quantite,prix_commande,date_commande from commande 
-            inner join users on commande.id=users.id WHERE commande.id_commande NOT IN (
-            
-            select commande.id_commande from commande 
-            inner join users on commande.id=users.id INNER JOIN livraison ON commande.id_commande=livraison.id_commande WHERE etat=1
-            )       
-            
-");
+            $commandes=DB::select("select commande.id_commande,name,users.adress,telephone,quantite,prix_commande,date_commande from commande
+             inner join users on commande.id=users.id where commande.id_commande not in(select livraison.id_commande from livraison )");
             return view('admin.ShowCommande')->with(["commandes"=>$commandes]);
         }
     /**

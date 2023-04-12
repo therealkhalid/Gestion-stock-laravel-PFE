@@ -27,9 +27,11 @@ class AdminLivraison extends Controller
     public function create()
     {
         $livreur=DB::select('select DISTINCT  users.id,name from users where users.role=3');
-        $client=DB::select('SELECT commande.id_commande,name FROM commande INNER JOIN users ON commande.id=users.id WHERE commande.id_commande not IN (
-            SELECT livraison.id_commande FROM livraison WHERE etat=0
-            )');
+        // $client=DB::select('SELECT commande.id_commande,name FROM commande INNER JOIN users ON commande.id=users.id WHERE commande.id_commande not IN (
+        //     SELECT livraison.id_commande FROM livraison WHERE etat=0
+        //     )');
+        $client=DB::select("SELECT commande.id_commande,name FROM commande INNER JOIN users
+        ON commande.id=users.id where commande.id_commande not in(select livraison.id_commande from livraison )");
         return view('admin.AddLivraison')->with(['livreur'=>$livreur,'client'=>$client]);
     }
 
