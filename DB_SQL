@@ -1,0 +1,404 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : dim. 14 mai 2023 à 18:31
+-- Version du serveur : 10.4.27-MariaDB
+-- Version de PHP : 8.2.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `laravel_`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `catalogue`
+--
+
+CREATE TABLE `catalogue` (
+  `id_catalogue` int(11) NOT NULL,
+  `id` int(11) DEFAULT NULL,
+  `title` varchar(500) DEFAULT NULL,
+  `description` varchar(500) DEFAULT NULL,
+  `date_catalogue` date DEFAULT NULL,
+  `image` varchar(1000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `catalogue`
+--
+
+INSERT INTO `catalogue` (`id_catalogue`, `id`, `title`, `description`, `date_catalogue`, `image`) VALUES
+(13, 9, 'BMW 123', 'model 2020 importer neuve', '2023-02-23', '1677777652_bmw3.jpg'),
+(15, 9, 'TEST10', 'TEST10', '2023-03-02', '1677777716_bmw37.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commande`
+--
+
+CREATE TABLE `commande` (
+  `id_commande` int(11) NOT NULL,
+  `id` int(11) DEFAULT NULL,
+  `quantite` float DEFAULT NULL,
+  `prix_commande` float DEFAULT NULL,
+  `date_commande` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `commande`
+--
+
+INSERT INTO `commande` (`id_commande`, `id`, `quantite`, `prix_commande`, `date_commande`) VALUES
+(15, 2, 100, 100, '2023-02-24'),
+(17, 3, 50, 50, '2023-02-25'),
+(18, 3, 150, 150, '2023-02-25'),
+(20, 2, 32, 32, '2023-02-25'),
+(23, 3, 100, 100, '2023-02-26'),
+(24, 2, 200, 200, '2023-02-26'),
+(25, 2, 50, 50, '2023-03-02'),
+(26, 2, 150, 150, '2023-03-02');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `livraison`
+--
+
+CREATE TABLE `livraison` (
+  `id_livraison` int(11) NOT NULL,
+  `id_commande` int(11) DEFAULT NULL,
+  `id` int(11) DEFAULT NULL,
+  `adress` varchar(200) NOT NULL,
+  `date_livraison` date DEFAULT NULL,
+  `etat` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `livraison`
+--
+
+INSERT INTO `livraison` (`id_livraison`, `id_commande`, `id`, `adress`, `date_livraison`, `etat`) VALUES
+(3, 20, 4, 'khemisset', '2023-03-03', 1),
+(6, 23, 8, 'khemisset', '2023-03-05', 0),
+(7, 17, 7, 'khemisset', '2023-03-09', 0),
+(8, 24, 6, 'rabat', '2023-03-03', 0),
+(9, 15, 4, 'khemisset', '2023-03-15', 1),
+(10, 17, 7, 'casablanca', '2023-03-10', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `migrations`
+--
+
+CREATE TABLE `migrations` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `migrations`
+--
+
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(5, '2014_10_12_000000_create_users_table', 1),
+(6, '2014_10_12_100000_create_password_resets_table', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `paiment`
+--
+
+CREATE TABLE `paiment` (
+  `id_payment` int(11) NOT NULL,
+  `id` int(11) DEFAULT NULL,
+  `prix_paiement` float DEFAULT NULL,
+  `date_paiement` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `paiment`
+--
+
+INSERT INTO `paiment` (`id_payment`, `id`, `prix_paiement`, `date_paiement`) VALUES
+(13, 2, 10, '2023-02-26'),
+(14, 3, 100, '2023-02-27'),
+(15, 2, 10, '2023-02-25'),
+(16, 3, 100, '2023-02-25'),
+(17, 2, 112, '2023-03-01'),
+(18, 2, 200, '2023-03-02');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `password_resets`
+--
+
+CREATE TABLE `password_resets` (
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reclamation`
+--
+
+CREATE TABLE `reclamation` (
+  `id_reclamation` int(11) NOT NULL,
+  `id` int(11) DEFAULT NULL,
+  `message` varchar(1000) DEFAULT NULL,
+  `date_reclamation` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `reclamation`
+--
+
+INSERT INTO `reclamation` (`id_reclamation`, `id`, `message`, `date_reclamation`) VALUES
+(2, 2, 'test1', '2003-12-10'),
+(5, 3, 'test3', '2023-02-06'),
+(6, 2, 'test byadi', '2023-03-31'),
+(7, 2, 'hbhbhbbhbhbb', '2023-03-04');
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `totalprixcommande`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `totalprixcommande` (
+`id` int(11)
+,`name` varchar(255)
+,`adress` varchar(255)
+,`telephone` varchar(255)
+,`prixCommande` double
+);
+
+-- --------------------------------------------------------
+
+--
+-- Doublure de structure pour la vue `totalprixpayments`
+-- (Voir ci-dessous la vue réelle)
+--
+CREATE TABLE `totalprixpayments` (
+`id` int(11)
+,`prixPaiement` double
+);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
+  `role` tinyint(4) NOT NULL DEFAULT 0,
+  `adress` varchar(255) NOT NULL,
+  `telephone` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `role`, `adress`, `telephone`, `created_at`, `updated_at`) VALUES
+(1, 'KHALID', 'khalid@gmail.com', NULL, '$2y$10$UM6IoI2ZPg62q5HFPdcV6uEx000SHv95slDWgxWVw08aTSn.SzPSG', NULL, 0, 'TIFLET', '+212766933356', '2023-02-24 14:00:31', '2023-02-24 14:00:31'),
+(2, 'aziz', 'aziz@gmail.com', NULL, '$2y$10$LXAD9RViKe6WhCDChco/Z.xOksmvf4itfqwHj3Jpu8tA1PeuN65MS', NULL, 1, 'TIFLET', '+212699668224', NULL, NULL),
+(3, 'zakariya', 'zakariya@gmail.com', NULL, '$2y$10$yKTmLWUfrGWnDa8Vsl.9e.s.1WcK9oYR1.ccDY5m5IXlIyAOQIG1i', NULL, 1, 'tiflet', '062514878', NULL, NULL),
+(4, 'YAHYA', 'yahya@gmail.com', NULL, '$2y$10$Sb4Z682JT8HLlIp5CKXJm.4FFIxcCx4gBGkyQyZZWSIyx1qIv6vlO', NULL, 3, 'khemisset', '+212788659412', NULL, NULL),
+(6, 'Livreur1', 'livreur1@gmail.com', NULL, '$2y$10$g535KyKf1rig5uzzfr3V.udxnO2B.97EqZ.p3W0BKngzt0ISbDZEm', NULL, 3, 'RABAT', '+21269874512', NULL, NULL),
+(7, 'Livreur2', 'livreur2@gmail.com', NULL, '$2y$10$IDwO2e.BJaC/OZmRMc2qWO9nT8uUq9JkViGCZtobJsJ54ZJxFh1Tu', NULL, 3, 'casablanca', '+212784596213', NULL, NULL),
+(8, 'Livreur3', 'livreur3@gmail.com', NULL, '$2y$10$p7taqLTSKMWd72CzUVyK7uz6WZz9JOa6LNQmMy3eRTWZJ3nJ4g/tO', NULL, 3, 'fes', '+212457896', NULL, NULL),
+(9, 'MESSI', 'messi@gmail.com', NULL, '$2y$10$BcXLbNaZRfTSJD7XE0WAI.7Tlv5aMCyZoz4HfCDVvmJE2d/sC4VMe', NULL, 2, 'France', '+2129936654874', NULL, NULL),
+(10, 'MODRIC', 'modric@gmail.com', NULL, '$2y$10$FiVeSpc9kLimWHkvJ5WWz.nbq3AX/rbB3erTZWReIoXXB8koxZD6S', NULL, 2, 'madrid', '+212565984712', NULL, NULL),
+(11, 'biyadi', 'biyadi@gmail.com', NULL, '$2y$10$o4Y5lsxxw/sam4DWaRXdhuBEpyjl35dcGwMDcpkC03DJYNkPk3RGG', NULL, 0, 'khemisset', '+212645789632', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `totalprixcommande`
+--
+DROP TABLE IF EXISTS `totalprixcommande`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `totalprixcommande`  AS SELECT `users`.`id` AS `id`, `users`.`name` AS `name`, `users`.`adress` AS `adress`, `users`.`telephone` AS `telephone`, sum(`commande`.`prix_commande`) AS `prixCommande` FROM (`users` join `commande` on(`users`.`id` = `commande`.`id`)) GROUP BY `users`.`id`, `users`.`name`, `users`.`adress`, `users`.`telephone``telephone`  ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la vue `totalprixpayments`
+--
+DROP TABLE IF EXISTS `totalprixpayments`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `totalprixpayments`  AS SELECT `users`.`id` AS `id`, sum(`paiment`.`prix_paiement`) AS `prixPaiement` FROM (`users` join `paiment` on(`users`.`id` = `paiment`.`id`)) GROUP BY `users`.`id``id`  ;
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `catalogue`
+--
+ALTER TABLE `catalogue`
+  ADD PRIMARY KEY (`id_catalogue`),
+  ADD KEY `id` (`id`);
+
+--
+-- Index pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD PRIMARY KEY (`id_commande`),
+  ADD KEY `id` (`id`);
+
+--
+-- Index pour la table `livraison`
+--
+ALTER TABLE `livraison`
+  ADD PRIMARY KEY (`id_livraison`),
+  ADD KEY `id_commande` (`id_commande`),
+  ADD KEY `id` (`id`);
+
+--
+-- Index pour la table `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `paiment`
+--
+ALTER TABLE `paiment`
+  ADD PRIMARY KEY (`id_payment`),
+  ADD KEY `id` (`id`);
+
+--
+-- Index pour la table `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Index pour la table `reclamation`
+--
+ALTER TABLE `reclamation`
+  ADD PRIMARY KEY (`id_reclamation`),
+  ADD KEY `id` (`id`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `catalogue`
+--
+ALTER TABLE `catalogue`
+  MODIFY `id_catalogue` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT pour la table `commande`
+--
+ALTER TABLE `commande`
+  MODIFY `id_commande` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+
+--
+-- AUTO_INCREMENT pour la table `livraison`
+--
+ALTER TABLE `livraison`
+  MODIFY `id_livraison` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT pour la table `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT pour la table `paiment`
+--
+ALTER TABLE `paiment`
+  MODIFY `id_payment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+
+--
+-- AUTO_INCREMENT pour la table `reclamation`
+--
+ALTER TABLE `reclamation`
+  MODIFY `id_reclamation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `catalogue`
+--
+ALTER TABLE `catalogue`
+  ADD CONSTRAINT `catalogue_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+
+--
+-- Contraintes pour la table `commande`
+--
+ALTER TABLE `commande`
+  ADD CONSTRAINT `commande_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+
+--
+-- Contraintes pour la table `livraison`
+--
+ALTER TABLE `livraison`
+  ADD CONSTRAINT `livraison_ibfk_1` FOREIGN KEY (`id_commande`) REFERENCES `commande` (`id_commande`),
+  ADD CONSTRAINT `livraison_ibfk_2` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+
+--
+-- Contraintes pour la table `paiment`
+--
+ALTER TABLE `paiment`
+  ADD CONSTRAINT `paiment_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+
+--
+-- Contraintes pour la table `reclamation`
+--
+ALTER TABLE `reclamation`
+  ADD CONSTRAINT `reclamation_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
